@@ -1,4 +1,4 @@
-#Trabajo Práctico 3: Recomendación de canciones en Spotify "Recomendify"
+# Trabajo Práctico 3: Recomendación de canciones en Spotify "Recomendify"
 
 El objetivo de este trabajo práctico es el de modelar un sistema de recomendación sobre un sistema
 de streaming de música: las canciones, playlists y usuarios. 
@@ -9,7 +9,7 @@ de streaming de música: las canciones, playlists y usuarios.
 El trabajo consiste de 3 partes:
 1. El TDA Grafo, con sus primitivas completamente agnósticas sobre su uso para modelar el sistema de recomendación de música.
 2. Una biblioteca de funciones de grafos, que permitan hacer distintas operaciones sobre un grafo que modela el sistema de música, sin importar cuál es la red específica.
-3. El programa `recomendify` que utilice tanto el TDA como la biblioteca para poder implementar todo
+3. El programa `recomendify` que utiliza tanto el TDA como la biblioteca para poder implementar todo
 lo requerido.
 
 
@@ -32,7 +32,9 @@ A continuación se listarán los comandos junto a ejemplos de entrada y salidas 
 * Parámetros: `origen` y `destino` (separados por `>>>>`). Origen y destino son **canciones**. Se indica el autor en cada caso. 
 * Utilidad: nos imprime una lista con la cual se conecta (en la menor cantidad de pasos posibles) una canción con otra, considerando los usuarios intermedios y las listas de reproducción en las que aparecen.
 * Ejemplos:
+
 Entrada:
+
     ```
     camino Don't Go Away - Oasis >>>> Quitter - Eminem
     camino yarits >>>> Quitter - Eminem
@@ -40,6 +42,7 @@ Entrada:
     camino Mr. Brightside - The Killers >>>> Grow Old With Me - Tom Odell
     ```
 Salida:
+
     ```
     Don't Go Away - Oasis --> aparece en playlist --> misturo tudãao ;x --> de --> 8902446 --> tiene una playlist --> sóo nacionais' --> donde aparece --> Ela Vai Voltar (Todos Os Defeitos de Uma Mulher Perfeita) - Charlie Brown Jr --> aparece en playlist --> Playlist da Yara --> de --> yarits --> tiene una playlist --> Playlist da Yara --> donde aparece --> Quitter - Eminem
     Tanto el origen como el destino deben ser canciones
@@ -59,11 +62,14 @@ Utilizando el algoritmo de **PageRank** determinar cuáles son la **canciones** 
 * Utilidad: nos muestra las `n` **canciones** más centrales/importantes del mundo según el algoritmo de
 pagerank, ordenadas de mayor importancia a menor importancia. 
 * Ejemplo:
+
 Entrada:
+
     ```
     mas_importantes 20
     ```
 Salida:
+
     ```
     Bad Romance - Lady Gaga; Poker Face - Lady Gaga; Telephone (feat. Beyoncé) - Lady Gaga; Paparazzi - Lady Gaga; Halo - Beyoncé; Viva La Vida - Coldplay; Single Ladies (Put a Ring on It) - Beyoncé; Decode - Paramore; In The End - Linkin Park; Levo Comigo - Restart; Leave Out All The Rest - Linkin Park; Broken-Hearted Girl - Beyoncé; Alejandro - Lady Gaga; If I Were A Boy - Beyoncé; I Gotta Feeling - Black Eyed Peas; Amo Noite E Dia - Jorge e Mateus; Sweet Dreams - Beyoncé; Smells Like Teen Spirit - Nirvana; Wonderwall - Oasis; Just Dance (feat. Colby O'Donis) - Lady Gaga
     ```
@@ -78,12 +84,15 @@ La idea será aplicar un PageRank Personalizado en el grafo completo desde el li
 * Parámetros: `usuarios/canciones`, si se espera una recomendación para seguir un usuario o para escuchar una cancion; `n`, la cantidad de usuarios o canciones a recomendar; `cancion1 >>>> cancion2 >>>> ... >>>> cancionK`, las canciones que ya sabemos que le gustan a la persona a recomendar.
 * Utilidad: Dar una lista de `n` usuarios o canciones para recomendar, dado el listado de canciones que ya sabemos que le gustan a la persona a la cual recomedar. 
 * Ejemplo:
+
 Entrada:
+
     ```
     recomendacion canciones 10 Love Story - Taylor Swift >>>> Toxic - Britney Spears >>>> I Wanna Be Yours - Arctic Monkeys >>>> Hips Don't Lie (feat. Wyclef Jean) - Shakira >>>> Death Of A Martian - Red Hot Chili Peppers
     recomendacion usuarios 5 Love Story - Taylor Swift >>>> Toxic - Britney Spears >>>> I Wanna Be Yours - Arctic Monkeys >>>> Hips Don't Lie (feat. Wyclef Jean) - Shakira >>>> Death Of A Martian - Red Hot Chili Peppers
     ```
 Salida:
+
     ```
     Butterfly - Grimes; Cola - Lana Del Rey; In Time - FKA Twigs; Touch - Troye Sivan; Hurricane - 30 Seconds To Mars; Boring - The Pierces; Cut Your Teeth - Kyla La Grange; Earned It - The Weeknd; Player (Feat. Chris Brown) - Tinashe; If I Were A Boy - Beyoncé
     lorenafazion; naosoumodinha; hlovato906gmail; tiagogabbana19; extralouca
@@ -95,12 +104,15 @@ Salida:
 * Parámetros: `n` y `cancion`.
 * Utilidad: permite obtener un ciclo de largo `n` (dentro de la red de canciones) que comience en la canción indicada.
 * Ejemplo:
+
 Entrada:
+
     ```
     ciclo 7 By The Way - Red Hot Chili Peppers
     ciclo 15 Love Me Like You Do - Ellie Goulding
     ```
 Salida:
+
     ```
     By The Way - Red Hot Chili Peppers --> Fairy Tale - Shaman --> I Hate Everything About You - Three Days Grace --> Viva La Vida - Coldplay --> Under The Bridge - Red Hot Chili Peppers --> November Rain - Guns N' Roses --> Cryin' - Aerosmith --> By The Way - Red Hot Chili Peppers
     Love Me Like You Do - Ellie Goulding --> Uptown Funk (Feat. Bruno Mars) - Mark Ronson --> Thinking Out Loud - Ed Sheeran --> Ship To Wreck - Florence And The Machine --> Fourfiveseconds (feat. Kanye West, Paul Mccartney) - Rihanna --> Feeling Myself (Feat. Beyoncé) - Nicki Minaj --> Cheerleader (Felix Jaehn Remix) - Omi --> Ayo (Feat. Tyga) - Chris Brown --> Um Leão - Pitty --> I Know What You Did Last Summer (feat. Camila Cabello) - Shawn Mendes --> Hello - Adele --> Confident - Demi Lovato --> Hotline Bling - Drake --> My House - Flo Rida --> Alive - Sia --> Love Me Like You Do - Ellie Goulding
@@ -115,7 +127,9 @@ En caso de no haber un ciclo de dicho largo empezando desde la página mencionad
 * Parámetros: `n` y `cancion`. 
 * Utilidad: permite obtener la cantidad de canciones que se encuenten a **exactamente** `n` saltos desde la `cancion` pasada por parámetro.
 * Ejemplo:
+
 Entrada:
+
     ```
     rango 8 Shots - Imagine Dragons
     rango 3 Shots - Imagine Dragons
@@ -123,10 +137,14 @@ Entrada:
     rango 4 I'm Yours - Jason Mraz
     ```
 Salida:
+
     ```
     0
+
     10325
+
     0
+
     431
     ```
 
@@ -143,13 +161,16 @@ $$ C = \frac{1}{n} \sum_{\forall v \in \text{grafo}} C_i $$
 * Parámetros: `cancion`, opcional. 
 * Utilidad: Permite obtener el coeficiente de clustering de la canción indicada. En caso de no indicar canción, se deberá informar el clustering promedio de la red. En ambos casos, informar con hasta 3 dígitos decimales. 
 * Ejemplo:
+
 Entrada:
+
     ```
     clustering Teenage Dream - Katy Perry
     clustering Grow Old With Me - Tom Odell
     clustering Drag Me Down - One Direction
     ```
 Salida:
+
     ```
     0.244
     0.000
@@ -183,7 +204,7 @@ Como dicho archivo contiene una enorme cantidad de entradas, existe también un 
 ## Entrega
 
 Adicionalmente a los archivos propios del trabajo práctico se adjunta un archivo `entrega.mk` que contiene la regla `recomendify` para generar el ejecutable de dicho programa (sea compilando o los comandos que fueren necesarios).
-### Entrega.mk
+#### Entrega.mk
 
 ``` makefile
 recomendify: recomendify.py grafo.py biblioteca.py
