@@ -1,3 +1,5 @@
+##Implementacion del TDA GRAFO
+
 import random
 
 class Grafo:
@@ -68,8 +70,6 @@ class Grafo:
             self.vertices[id_fin][id_inicio] = peso
 
             self.cant_aristas += 1
-        """self.cant_aristas += 1
-		"""
            
     def borrar_arista(self, id_inicio, id_fin):
 
@@ -79,12 +79,12 @@ class Grafo:
         if not self.son_adyacentes(id_inicio,id_fin):
                 raise ValueError("Esa arista no esta en el grafo")
 
-        self.vertices[id_inicio].pop(id_fin) #dudoso si estoy popeando bien aca o es self.vertices[id_inicio][id_fin].pop(id_fin) ?
+        self.vertices[id_inicio].pop(id_fin)
 
         self.cant_aristas -= 1
 
         if not self.es_dirigido:
-            self.vertices[id_fin].pop(id_inicio) #dudoso si estoy popeando bien aca o es self.vertices[id_fin][id_inicio].pop(id_inicio) ?
+            self.vertices[id_fin].pop(id_inicio)
         
 
 
@@ -109,8 +109,6 @@ class Grafo:
             raise ValueError("El vertice no existe")
         lista_adyacentes = []
         return self.vertices[id_vertice].keys()
-        """lista_adyacentes.append(x)
-        return lista_adyacentes"""
 
 
     def obtener_cantidad_aristas(self):

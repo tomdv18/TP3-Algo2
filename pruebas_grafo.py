@@ -1,10 +1,6 @@
 from grafo import Grafo
 
-
-#==============================================================================
-# Empiezan las pruebas
-# Quiza haaya qye hacer otro archivo, pero me es mas practico probar aca
-# Talvez falte alguna prueba de volumen
+# Pruebas sobre el TDA Grafo
 
 def prueba_crear_grafo():
 	grafo = Grafo ()
@@ -13,7 +9,6 @@ def prueba_crear_grafo():
 		print ("\033[1;37m " + "Grafo inicializado, cantidad correcta " +"\033[1;32m "+ "Ok")
 	if cantidad != 0:
 		print ("\033[1;37m " + "Grafo inicializado, cantidad correcta " + "\033[1;31m " + "Error" )
-# No puedo entender bien porque esto no me funciona
 
 
 
@@ -227,17 +222,6 @@ def prueba_imprimir():
 	grafo.agregar_arista(vertice2, vertice4, 1)
 	str(grafo)
 
-"""
-Habria que agregar pruebas para usar el iterador
-"""
-
-"""
-def prueba_colores():
-	print ("\033[1;34m " + "Bokita el mas grande")
-	print ("\033[1;33m " + "Bokita el mas grande")
-	print ("\033[1;34m " + "Bokita el mas grande")
-
-"""
 
 def pruebas_estudiantes():
 	prueba_crear_grafo()

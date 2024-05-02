@@ -14,7 +14,6 @@ def parseo_archivo(ruta,grafo_likes,grafo_canciones_en_playlist, lista_usuarios)
         archivo.readline() # salteo header
        
         for linea in archivo:
-            #print(playlist_actual,canciones_playlist)  
             linea = linea.rstrip('\n').split('\t')
             
             usuario = linea[1]
@@ -31,12 +30,11 @@ def parseo_archivo(ruta,grafo_likes,grafo_canciones_en_playlist, lista_usuarios)
             if playlist[1] not in dict_canciones_paylist:
                 dict_canciones_paylist[playlist[1]] = []
             dict_canciones_paylist[playlist[1]].append(cancion_y_artista)
-            #canciones_playlist,playlist_actual = parseo_grafo_canciones_en_playlist(grafo_canciones_en_playlist,usuario, cancion_y_artista, artista, playlist, genero,playlist_actual,canciones_playlist)
     return dict_canciones_paylist
             
 
 
-def parseo_grafo_likes(grafo, usuario, cancion, artista, playlist,genero): #ES PROBABLE QUE POR EJEMPLO GENERO NO LO NECESITEMOS ASI QUE HAY QUE SACARLO
+def parseo_grafo_likes(grafo, usuario, cancion, artista, playlist,genero):
     if not grafo.vertice_pertenece(usuario):
         grafo.agregar_vertice(usuario)
     if not grafo.vertice_pertenece(cancion):
@@ -57,30 +55,6 @@ def parseo_grafo_canciones_en_playlist______dict(grafo, dict):
                     grafo.agregar_arista(cancion_a_unir,cancion,playlist)
 
 
-"""
-def parseo_grafo_canciones_en_playlist(grafo, usuario, cancion, artista, playlist,genero,playlist_actual,canciones_playlist):
-
-    if not grafo.vertice_pertenece(cancion):
-        grafo.agregar_vertice(cancion)
-    
-    if (playlist_actual != playlist[1]):
-        #print("si, nueva playlist")
-        playlist_actual = playlist[1]
-        canciones_playlist = []
-    
-
-    for x in canciones_playlist:
-        if not grafo.son_adyacentes(cancion, x) and not x==cancion:
-            grafo.agregar_arista(cancion, x, playlist)
-
-    canciones_playlist.append(cancion)
-    return canciones_playlist,playlist_actual
-
-    """
-
-"""
-------------------------------------------------------------------------------------------------------
-"""
 def imprimir_camino(grafo,lista, origen):
     salida = ""
     tope = len(lista)
@@ -122,10 +96,6 @@ def camino_mas_corto(grafo, origen, destino, lista_usuarios):
     imprimir_camino(grafo,lista,orden)
 
 
-"""
---------------------------------------------------------------------------------------------------------------------
-"""
-
 def coeficiente_clustering_individual(grafo, cancion):
     coeficiente = 0.000
     lista = grafo.obtener_adyacentes(cancion)
@@ -159,9 +129,6 @@ def coeficiente_clustering(grafo, cancion = None):
     return
 
 
-"""
-----------------------------------------------------------------------------------------------------------------
-"""
 def es_ciclo_posible(grafo, n ,cancion):
     if len(grafo) < n or len(grafo.obtener_adyacentes(cancion)) == 1 or not grafo.vertice_pertenece(cancion):
         return False
@@ -182,7 +149,6 @@ def _ciclo_canciones_BT(grafo,n,cancion,visitados,lista, actual, cancion_final):
 
 
     for v in grafo.obtener_adyacentes(cancion):
-        #print(visitados) este print esta bueno para ver como avanza el backtracking
         if (v not in visitados): 
             visitados.add(v)
             se_pudo = _ciclo_canciones_BT(grafo,n,v,visitados,lista, actual + 1,cancion_final)
@@ -203,9 +169,6 @@ def ciclo_canciones(grafo,n,cancion):
     visitados = set()
     actual = 0
     estado =  _ciclo_canciones_BT(grafo,n,cancion,visitados,lista, actual, cancion)
-    """
-	Si todo esta bien, esta funcion deberia devolver una lista de n elementos
-    """    
     if estado == True:
         salida= ""
         for n in lista[::-1]:
@@ -213,19 +176,14 @@ def ciclo_canciones(grafo,n,cancion):
         print(salida.strip(" --> "))
     else:
         print("No se encontro recorrido")
-"""
-----------------------------------------------------------------------------------------------------------------
-"""
 
 def todas_en_rango(grafo,n,cancion):
     contador = 0
 
     bfs_resultado = bfs(grafo,cancion)
-    #print(bfs_resultado)
     dict_orden = bfs_resultado[1]
 
     for x in dict_orden.values():
-        #print(x)
         if x == n:
             contador+=1
     
@@ -235,7 +193,6 @@ def page_rank(grafo,n):
     
     #n es la cantidad de iteraciones de pagerank, se suelen obtener resultados certeros con aprox 15 iteraciones
     page_rank_dict = {}
-    #inicializo todos los vertices
     lista_vertices = grafo.obtener_todos_vertices()
     cantidad = len(lista_vertices)
     for vertice in lista_vertices:
@@ -264,8 +221,6 @@ def pagerank_vertice(grafo,vertice,page_rank_dict, n):
 def canciones_mas_importantes(grafo,n_canciones, page_rank_lista):
     page_rank_dict = page_rank(grafo,15) 
     return page_rank_dict
-    """for v in page_rank_resultado:
-    	page_rank_lista.append(v)""" 
     	
 
 
@@ -281,15 +236,15 @@ def imprimir_rango(page_rank_lista, n_canciones, dict_usuarios):
             i = i + 1
         j = j + 1 
 
-def imprimir_rango_pp(page_rank_dict, n_canciones, dict_usuarios, lista_likeadas = None):
+def imprimir_rango_pp(page_rank_dict, n_canciones, dict_usuarios, lista_likeadas=None):
     i = 0
     j = 0 
     while i != n_canciones:
         if not page_rank_dict[j] in dict_usuarios and page_rank_dict[j] not in lista_likeadas:
             if i == n_canciones-1:
-            	print(f"{page_rank_dict[j]}")
+                print(f"{page_rank_dict[j]}")
             else:
-                print(f"{page_rank_dict[j]};",end=" ")
+                print(f"{page_rank_dict[j]};", end=" ")
             i = i + 1
         j = j + 1 
 
@@ -307,11 +262,6 @@ def imprimir_rango_usuarios_pp(page_rank_dict, n_canciones, dict_usuarios,lista_
 
 
 def page_rank_personalizado(grafo, canciones_likeadas,largo_rw,iteraciones):
-    """
-    La probabilidad para movernos de un vértice a un vecino puede ser equiprobable 
-    El largo del recorrido
-    La cantidad de recorridos a realizar
-    """
     page_rank_per_dict = {}
 
     for i in range(iteraciones):
@@ -342,10 +292,6 @@ def recomendacion(grafo,n,lista,canciones_o_usuarios,lista_usuarios):
 
 
 
-    
-"""
--------------------------------------------------------------------------------------------------------------------------------
-"""
 
 def procesar_comando(grafo_likes,grafo_canciones_en_playlist,comando,parametros, page_rank_lista, lista_usuarios,dict_canciones_playlist):
 
@@ -373,13 +319,6 @@ def procesar_comando(grafo_likes,grafo_canciones_en_playlist,comando,parametros,
         imprimir_rango(page_rank_lista, n, lista_usuarios)
        
     elif comando == "recomendacion":
-  
-        """
-        Parámetros: usuarios/canciones, si se espera una recomendación para seguir un usuario 
-        o para escuchar una cancion; n, la cantidad de usuarios o canciones a recomendar; 
-        cancion1 >>>> cancion2 >>>> ... >>>> cancionK, las canciones que ya sabemos que le gustan a la persona 
-        a recomendar (que podrías ser vos misma ;-)).
-        """
 
         param = parametros.split(" ")
         canciones_o_usuarios = param[0]
@@ -436,7 +375,6 @@ def main():
     archivo_spotify = sys.argv[1]
     lista_usuarios = []
     page_rank_lista = []
-    #archivo_recibido = leer_archivo(archivo_spotify)
     dict_canciones_playlist = parseo_archivo(archivo_spotify,grafo_likes,grafo_canciones_en_playlist, lista_usuarios)
 
     while True:
@@ -450,7 +388,5 @@ def main():
         parametros = " ".join(entrada_split[1:])
         procesar_comando(grafo_likes,grafo_canciones_en_playlist,comando,parametros, page_rank_lista, lista_usuarios,dict_canciones_playlist)
  
-
-
 
 main()

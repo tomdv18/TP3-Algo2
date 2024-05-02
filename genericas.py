@@ -1,6 +1,6 @@
-"""
-ESTE ARCHIVO TIENE FUNCIONES GENERICAS QUE DESPUES PODRIAMOS ADAPTAR DE ALGUNA FORMA
-"""
+
+##ESTE ARCHIVO TIENE CON FUNCIONES GENERICAS DE GRAFOS
+
 from collections import deque
 import heapq
 
@@ -36,7 +36,6 @@ def bfs(grafo, origen, limite = None):
 	q = deque()
 	q.append(origen)
 	while ((len(q)) != 0):
-		#print(orden)
 		v = q.popleft()
 		if (v == limite):
 			return padres, orden 
@@ -54,9 +53,8 @@ def bfs(grafo, origen, limite = None):
 	
 
 
-"""
-Si el grafo no es 100 porciento conexo, quedarian vertices con distancia infinita
-"""
+
+##Si el grafo no es 100 porciento conexo, quedarian vertices con distancia infinita
 def camino_minimo_dijkstra(grafo, origen):
 	distancia = {}
 	padre = {}
